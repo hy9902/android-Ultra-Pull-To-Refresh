@@ -6,7 +6,11 @@
 
 支持 `API LEVEL >= 8`。
 
-[APK下载](https://raw.githubusercontent.com/liaohuqiu/android-Ultra-Pull-To-Refresh/master/ptr-demo/target/ultra-ptr-demo.apk)
+[APK下载](https://raw.githubusercontent.com/liaohuqiu/android-Ultra-Pull-To-Refresh/master/ptr-demo.apk)
+
+#### 使用eclipse的同学请注意, Intellij IDEA / Android Studio 请忽略
+
+**demo可以直接在eclipse中运行, 编译demo项目的同学看这里:  http://www.liaohuqiu.net/cn/posts/compile-ultra-ptr-in-eclipse/**
 
 * 先上两张StoreHouse风格的截图! 感谢 [CBStoreHouseRefreshControl](https://github.com/coolbeet/CBStoreHouseRefreshControl).
     <div class='row'>
@@ -14,6 +18,10 @@
         <img src='http://srain-github.qiniudn.com/ultra-ptr/store-house-string.gif' width="300px" style='border: #f1f1f1 solid 1px'/>
     </div>
 
+* 5.0 Material 风格 2014-12-09 新增。**阴影效果，gif图看起来有些失真，看demo吧！**
+    <div class='row'>
+        <img src='http://srain-github.qiniudn.com/ultra-ptr/material-style.gif' width="300px"/>
+    </div>
 
 * **支持所有的View**: 
 
@@ -43,22 +51,61 @@
 
 #### 中央库依赖
 
-** 使用 eclipse 的同学需要maven插件，配置复杂。可将 demo中的 libs目录下 apklib结尾的包改后缀解压，独立项目引入。 **
+项目已经发布到了Maven中央库，包括`aar`和`apklib`两种格式。在Maven或者Gradle下可如下直接引入:
 
-Maven /  pom.xml 
+最新版版本号: `1.0.8.3-SNAPSHOT`, 发布到了: https://oss.sonatype.org/content/repositories/snapshots
+
+在gradle中:
+
+```
+maven {
+    url 'https://oss.sonatype.org/content/repositories/snapshots'
+}
+```
+
+稳定版: `1.0.8`, https://oss.sonatype.org/content/repositories/releases, in gradle:
+
+```
+mavenCentral()
+```
+
+`pom.xml` 文件中
+
+最新版:
 
 ```xml
 <dependency>
     <groupId>in.srain.cube</groupId>
     <artifactId>ultra-ptr</artifactId>
-    <type>apklib</type>
-    <version>1.0.3</version>
+    <type>aar</type>
+    <!-- or apklib format, if you want -->
+    <!-- <type>apklib</type> -->
+    <version>1.0.8.3-SNAPSHOT</version>
+</dependency>
+
+稳定版
+
+```xml
+<dependency>
+    <groupId>in.srain.cube</groupId>
+    <artifactId>ultra-ptr</artifactId>
+    <type>aar</type>
+    <!-- or apklib format, if you want -->
+    <!-- <type>apklib</type> -->
+    <version>1.0.8</version>
 </dependency>
 ```
 
-gradle / Android Studio
+gradle / Android Studio, 最新版
+
 ```
-compile 'in.srain.cube:ultra-ptr:1.0.3'
+compile 'in.srain.cube:ultra-ptr:1.0.8.3-SNAPSHOT@aar'
+```
+
+gradle / Android Studio, 稳定版
+
+```
+compile 'in.srain.cube:ultra-ptr:1.0.8@aar'
 ```
 
 #### 配置
@@ -135,6 +182,12 @@ mPtrFrame.setPullToRefresh(false);
 // default is true
 mPtrFrame.setKeepHeaderWhenRefresh(true);
 ```
+
+### 其他配置
+
+*  刷新时，保持内容不动，仅头部下移, `setPinContent()`
+
+    `Material` 风格时，效果不错，其他风格的头部，效果不好。issue #29
 
 ## StoreHouse 风格
 
@@ -228,6 +281,12 @@ ptrFrame.setPtrHandler(new PtrHandler() {
 });
 ```
 
+# 常见问题
+
+*  ViewPager滑动冲突: `disableWhenHorizontalMove()`
+
+*  长按LongPressed, `setInterceptEventWhileWorking()`
+
 
 # License
 
@@ -236,7 +295,13 @@ Apache 2
 # 联系方式和问题建议
 
 * 微博: http://weibo.com/liaohuqiu
-* QQ 群: 271918140
+* QQ 群: 
+
+    加群前请先阅读群约定: https://github.com/liaohuqiu/qq-tribe-rule
+
+    1. cube系列开源项目使用交流，问题解答: 271918140 (cube-sdk)
+    2. 如果你会通过google解决问题，喜欢独立思考，喜欢和优秀却又温和的人成为朋友，欢迎加入技术交流群: 417208555 (cube-core)
+
 * srain@php.net
 * twitter: https://twitter.com/liaohuqiu
 * blog: http://www.liaohuqiu.net

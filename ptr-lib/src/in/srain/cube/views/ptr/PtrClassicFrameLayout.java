@@ -1,11 +1,7 @@
 package in.srain.cube.views.ptr;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.view.View;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.RotateAnimation;
 
 public class PtrClassicFrameLayout extends PtrFrameLayout {
 
@@ -36,12 +32,22 @@ public class PtrClassicFrameLayout extends PtrFrameLayout {
         return mPtrClassicHeader;
     }
 
+    /**
+     * Specify the last update time by this key string
+     *
+     * @param key
+     */
     public void setLastUpdateTimeKey(String key) {
         if (mPtrClassicHeader != null) {
             mPtrClassicHeader.setLastUpdateTimeKey(key);
         }
     }
 
+    /**
+     * Using an object to specify the last update time.
+     *
+     * @param object
+     */
     public void setLastUpdateTimeRelateObject(Object object) {
         if (mPtrClassicHeader != null) {
             mPtrClassicHeader.setLastUpdateTimeRelateObject(object);

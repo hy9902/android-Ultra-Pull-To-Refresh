@@ -5,16 +5,14 @@ import in.srain.cube.Cube;
 import in.srain.cube.image.ImageLoaderFactory;
 import in.srain.cube.request.RequestCacheManager;
 import in.srain.cube.util.CLog;
-import in.srain.cube.util.Debug;
+import in.srain.cube.util.CubeDebug;
 import in.srain.cube.views.ptr.PtrFrameLayout;
-import in.srain.cube.views.ptr.PtrUIHandler;
-import in.srain.cube.views.ptr.PtrUIHandlerHolder;
-import in.srain.cube.views.ptr.demo.image.DemoDuiTangImageResizer;
-import in.srain.cube.views.ptr.header.StoreHouseHeader;
+import in.srain.cube.views.ptr.demo.image.DemoDuiTangImageReSizer;
+import in.srain.cube.views.ptr.demo.image.PtrImageLoadHandler;
 
-public class CubeDemoApplication extends Application {
+public class PtrDemoApplication extends Application {
 
-    public static CubeDemoApplication instance;
+    public static PtrDemoApplication instance;
 
     @Override
     public void onCreate() {
@@ -32,12 +30,14 @@ public class CubeDemoApplication extends Application {
             CLog.setLogLevel(CLog.LEVEL_VERBOSE);
         }
 
-        // Debug.DEBUG_IMAGE = true;
-        // PtrFrameLayout.DEBUG = true;
+        CubeDebug.DEBUG_IMAGE = true;
+        PtrFrameLayout.DEBUG = true;
+        PtrFrameLayout.DEBUG = false;
 
-        ImageLoaderFactory.setDefaultImageResizer(DemoDuiTangImageResizer.getInstance());
+        ImageLoaderFactory.setDefaultImageReSizer(DemoDuiTangImageReSizer.getInstance());
+        ImageLoaderFactory.setDefaultImageLoadHandler(new PtrImageLoadHandler());
         String dir = "request-cache";
-        ImageLoaderFactory.init(this);
+        // ImageLoaderFactory.init(this);
         RequestCacheManager.init(this, dir, 1024 * 10, 1024 * 10);
         Cube.onCreate(this);
     }

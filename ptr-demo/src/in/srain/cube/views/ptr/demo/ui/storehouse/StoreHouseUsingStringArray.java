@@ -8,13 +8,14 @@ import in.srain.cube.image.CubeImageView;
 import in.srain.cube.image.ImageLoader;
 import in.srain.cube.image.ImageLoaderFactory;
 import in.srain.cube.mints.base.TitleBaseFragment;
-import in.srain.cube.util.Debug;
+import in.srain.cube.util.CubeDebug;
 import in.srain.cube.util.LocalDisplay;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler;
 import in.srain.cube.views.ptr.PtrUIHandler;
 import in.srain.cube.views.ptr.demo.R;
 import in.srain.cube.views.ptr.header.StoreHouseHeader;
+import in.srain.cube.views.ptr.indicator.PtrIndicator;
 
 public class StoreHouseUsingStringArray extends TitleBaseFragment {
 
@@ -35,8 +36,6 @@ public class StoreHouseUsingStringArray extends TitleBaseFragment {
         String pic = "http://img5.duitang.com/uploads/item/201406/28/20140628122218_fLQyP.thumb.jpeg";
         imageView.loadImage(imageLoader, pic);
 
-        Debug.DEBUG_PTR_FRAME = true;
-
         final PtrFrameLayout frame = (PtrFrameLayout) view.findViewById(R.id.store_house_ptr_frame);
         final StoreHouseHeader header = new StoreHouseHeader(getContext());
         header.setPadding(0, LocalDisplay.dp2px(15), 0, 0);
@@ -44,7 +43,7 @@ public class StoreHouseUsingStringArray extends TitleBaseFragment {
         // using string array from resource xml file
         header.initWithStringArray(R.array.storehouse);
 
-        frame.setDurationToCloseHeader(3000);
+        frame.setDurationToCloseHeader(1500);
         frame.setHeaderView(header);
         frame.addPtrUIHandler(header);
         frame.postDelayed(new Runnable() {
@@ -91,7 +90,7 @@ public class StoreHouseUsingStringArray extends TitleBaseFragment {
             }
 
             @Override
-            public void onUIPositionChange(PtrFrameLayout frame, boolean isUnderTouch, byte status, int oldPosition, int currentPosition, float oldPercent, float currentPercent) {
+            public void onUIPositionChange(PtrFrameLayout frame, boolean isUnderTouch, byte status, PtrIndicator ptrIndicator) {
 
             }
         });
